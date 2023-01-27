@@ -33,3 +33,12 @@
 
 # Now calculating average of 1000000 random numbers
 0.500053
+
+# Now calculating error of 100 random numbers
+0.023904
+
+# Now calculating error of 10000 random numbers
+0.000446985
+
+# Now calculating error of 1000000 random numbers
+5.27217e-05

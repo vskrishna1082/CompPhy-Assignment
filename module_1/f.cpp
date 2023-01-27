@@ -12,12 +12,12 @@ void randomAverage(int count) // appends average of <count> random numbers to te
     double average;
 
     datafile.open("test_ran.dat", ios::app);
-    datafile << "\n# Now calculating average of " << count << " random numbers\n";
+    datafile << "\n# Now calculating error of " << count << " random numbers\n";
     for (size_t i=0; i<count; i++) {
         sum += u(e);
     }
     average = sum / count;
-    datafile << average << "\n";
+    datafile << abs(0.5 - average) << "\n";
     datafile.close();
 }
 
