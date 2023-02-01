@@ -11,5 +11,5 @@ Ydata = np.transpose(Ydata)
 slope,intercept,r_value,p_value,std_err = linregress(Xdata,Ydata)
 
 print("Slope: ", slope)
-plt.scatter(Xdata,Ydata)
+plt.scatter(Xdata,Ydata, marker='.', s=2)
 plt.show()
