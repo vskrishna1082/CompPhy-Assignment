@@ -37,6 +37,21 @@ int main() {
     for (auto& n : rand_array) {
         var += n*n - mean*mean;
     }
+
+    ofstream corr_file;
+    corr_file.open("q_2_c_auto_correlation.dat");
+    for (int j=0; j<n/3; j++)
+    {
+        double sum = 0;
+        for (int i=0; i<n-j; i++) {
+            sum += rand_array[i]*rand_array[i+j];
+        }
+        sum = sum / (double) (n-j);
+        double corr = (sum - (mean*mean))/(var);
+        corr_file << corr << endl;
+    }
+    corr_file.close();
+
     var = var/(double) n;
     double error = abs(mean - 0.5000000);
     cout << error << " " << sqrt(var) << "\n";

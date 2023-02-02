@@ -5,12 +5,14 @@
 #include <random>
 using namespace std;
 
+double sigma=2;
+
 double radial(double x) {
-    return sqrt(-2*log(x)); // def only for x in (0,1]
+    return sigma*sqrt(-2*log(x)); // def only for x in (0,1]
 }
 
 double polar(double y) {
-    return 2*M_PI*y;
+    return 2*M_PI*y*sigma;
 }
 
 double xy[2];
