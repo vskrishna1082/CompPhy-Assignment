@@ -5,8 +5,6 @@
 #include <random>
 using namespace std;
 
-const int num_rand_nos = 1000;
-
 long double inv_func(long double x) {
     return -2*log(1-x);
 }
