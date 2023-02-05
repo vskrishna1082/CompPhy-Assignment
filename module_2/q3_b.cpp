@@ -26,12 +26,12 @@ double *cartesian(double r, double theta)
 int main()
 {
     const int num_rand_nos = 10000;
-    default_random_engine x(1),y(time(0));
+    mt19937 x(3),y(4);
     uniform_real_distribution<double> u(0,1);
 
     ofstream x_file,y_file;
-    x_file.open("gaussian_rv_1.dat");
-    y_file.open("gaussian_rv_2.dat");
+    x_file.open("gaussian_rv_3.dat");
+    y_file.open("gaussian_rv_4.dat");
     for (int i=0; i<num_rand_nos; i++)
     {
         double gaussian[2];

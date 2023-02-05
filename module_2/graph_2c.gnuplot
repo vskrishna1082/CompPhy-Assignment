@@ -3,6 +3,7 @@ set output 'plots/q2_c_correlation.png'
 
 set xlabel "Lag"
 set ylabel "Auto-Correlation"
+set xrange [-100:35000]
 set size square
 set style data dots
 unset key
