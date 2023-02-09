@@ -26,7 +26,7 @@ double *cartesian(double r, double theta)
 int main()
 {
     const int num_rand_nos = 10000;
-    mt19937 x(3),y(4);
+    default_random_engine x(3),y(4);
     uniform_real_distribution<double> u(0,1);
 
     ofstream x_file,y_file;

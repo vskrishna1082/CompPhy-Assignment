@@ -9,7 +9,7 @@ using namespace std;
  * Evaluating integral between -2 and 2 along all axes */
 
 // Sample points per axis
-const int n_i = 10000;
+const int n_i = 10;
 double sq(double x) {
     return pow(x,2);
 }
@@ -37,8 +37,14 @@ int main()
 {
     ofstream outfile;
     outfile.open("Brute_Monte_Carlo.dat");
-    for (int i=0; i<10000; i++) {
-        outfile << eval_rand_pt(i) << "\n";
+    double estimates[n_i-1];
+#pragma omp parallel for
+    for (int i=0; i<n_i; i++) {
+        estimates[i] = eval_rand_pt(i);
+    }
+
+    for (int i=0; i<n_i; i++) {
+        outfile << estimates[i] << "\n";
     }
     outfile.close();
 }

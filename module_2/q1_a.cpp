@@ -7,7 +7,7 @@
 using namespace std;
 
 const double pi=M_PI;
-bool verbose = false;
+bool verbose = true;
 
 /* return the value of the function at x */
 double func(double x) {
