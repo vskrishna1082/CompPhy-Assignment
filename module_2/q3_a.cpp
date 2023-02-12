@@ -6,14 +6,14 @@
 using namespace std;
 
 long double inv_func(long double x) {
-    return -2*log(1-x);
+    return -log(1-2*x);
 }
 
 int main()
 {
     const int n_points = 10000;
     default_random_engine e;
-    uniform_real_distribution<long double> u(0,1);
+    uniform_real_distribution<long double> u(0,0.5);
 
     ofstream exp_file;
     exp_file.open("exp_rand_nos.dat");

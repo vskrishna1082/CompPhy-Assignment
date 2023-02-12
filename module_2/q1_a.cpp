@@ -25,10 +25,10 @@ long binner(long i)
 
 int main()
 {
-    long iterations= 10000;
+    long iterations= 100000;
 
     if (verbose == true) {
-        iterations= 4;
+        iterations= 6;
     }
 
     double log_bins_array[iterations];

@@ -9,7 +9,7 @@ using namespace std;
  * Evaluating integral between -2 and 2 along all axes */
 
 // Sample points per axis
-const int n_i = 10;
+const int n_i = 10000;
 double sq(double x) {
     return pow(x,2);
 }
@@ -25,7 +25,9 @@ double eval_rand_pt(int seed)
     uniform_real_distribution<double> u(-2,2);
     double sum = 0;
     for (int i=0; i < n_i; i++) {
-        sum += func(u(x_1),u(x_2),u(x_3),u(y_1),u(y_2),u(y_3));
+        double func_val = func(u(x_1),u(x_2),u(x_3),u(y_1),u(y_2),u(y_3));
+        cout << func_val << endl;
+        sum += func_val;
     }
     double average = sum/n_i;
     double integral = average * pow(4,6);
@@ -38,13 +40,13 @@ int main()
     ofstream outfile;
     outfile.open("Brute_Monte_Carlo.dat");
     double estimates[n_i-1];
-#pragma omp parallel for
-    for (int i=0; i<n_i; i++) {
-        estimates[i] = eval_rand_pt(i);
-    }
+    /* for (int i=0; i<1; i++) { */
+        /* estimates[i] = eval_rand_pt(i); */
+    /* } */
+    cout << eval_rand_pt(0) << endl;
 
-    for (int i=0; i<n_i; i++) {
-        outfile << estimates[i] << "\n";
-    }
+    /* for (int i=0; i<n_i; i++) { */
+    /*     outfile << estimates[i] << "\n"; */
+    /* } */
     outfile.close();
 }
