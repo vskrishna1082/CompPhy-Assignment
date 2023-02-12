@@ -57,9 +57,9 @@ int main()
     vector<double> x_vector = {};
     vector<double> v_vector = {};
 
-    double init_x = 0.1;
+    double init_x = 0.0;
     x_vector.push_back(init_x);
-    double init_v = 1.99;
+    double init_v = 1.999;
     v_vector.push_back(init_v);
 
     while (curr_t < 50)

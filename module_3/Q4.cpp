@@ -5,8 +5,6 @@
 #include <vector>
 using namespace std;
 
-const double y_actual = 48.078;
-
 double derivative_func(auto x, auto y) {
     return pow(y,2)+1;
 }
