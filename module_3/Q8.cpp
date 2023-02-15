@@ -1,6 +1,7 @@
 /* Motion of particles on a circular ring - SHM */
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <array>
 #include <cmath>
@@ -16,38 +17,45 @@ struct state {
 
 double dvdt_func(struct state state, int i)
 {
-    double y_i   =  state.y[i].back();
-    double y_ip1 =  state.y[i+1].back();
-    double y_im1 =  state.y[i-1].back();
+    double y_i = state.y[i].back();
+    double y_im1, y_ip1;
     if (i == 0) {
-        y_im1 = state.y.back().back(); // latest y value of last particle
+        y_im1 = state.y.back().back(); /* latest y value of last particle */
+        y_ip1 = state.y[i+1].back();
     }
-    if (i == n_particles - 1) {
+    else if (i == n_particles - 1) {
+        y_im1 =  state.y[i-1].back();
         y_ip1 = state.y[0].back();
     }
+    else {
+        y_ip1 =  state.y[i+1].back();
+        y_im1 =  state.y[i-1].back();
+    }
+    /* cout << "Is the crash before this?" << endl; */
     return y_ip1 + y_im1 -2*y_i;
 }
 
 struct state rk_increment(struct state curr_state, double dt)
 {
     const double dtby2 = 0.5*dt;
-    array<double, n_particles> slope1, slope2, slope3, slope4;
+    array<double, n_particles> slope1 = {0}, slope2 = {0}, slope3 = {0}, slope4 = {0};
     struct state int_state1, int_state2, int_state3, ret_state;
 
     /* First Intermediate point */
     for (int i = 0; i < n_particles; i++) {
         double y0 = curr_state.y[i].back();
         double v0 = curr_state.v[i].back();
-        slope1[i] = dvdt_func(curr_state, i);
+        double slope1_i = dvdt_func(curr_state, i);
+        slope1[i] = slope1_i;
         int_state1.v[i].push_back(v0 + slope1[i]*dtby2);
         int_state1.y[i].push_back(y0 + v0*dtby2);
     }
 
     /* Second Intermediate point */
     for (int i = 0; i < n_particles; i++) {
-        double y0 = curr_state.y[i].back();
-        double v0 = curr_state.v[i].back();
-        double v1 = int_state1.v[i].back();
+        const double& y0 = curr_state.y[i].back();
+        const double& v0 = curr_state.v[i].back();
+        const double& v1 = int_state1.v[i].back();
         slope2[i] = dvdt_func(int_state1, i);
         int_state2.v[i].push_back(v0 + slope2[i]*dtby2);
         int_state2.y[i].push_back(y0 + v1*dtby2);
@@ -86,7 +94,7 @@ struct state rk_increment(struct state curr_state, double dt)
 
 int main()
 {
-    double t_final = 50;
+    double t_final = 40;
     double dt = 0.02;
     vector<double> init_vector = {0}; // set all values to 0
     struct state curr_state;
@@ -99,11 +107,25 @@ int main()
 
     /* intial conditions */
     curr_state.y[0][0]  = 0.8;
+    curr_state.y[1][0]  = 0.2;
     curr_state.y[25][0] = 0.8;
 
     while (curr_state.t < t_final) {
         curr_state = rk_increment(curr_state, dt);
+        cout << curr_state.t << " ";
     }
+    cout << endl;
     cout << curr_state.y[0].back() << endl;
+
+    ofstream p1_posfile;
+    p1_posfile.open("data/Q8_particle_1_pos.dat");
+    for (int i = 0; i < curr_state.y[0].size(); i++) {
+        p1_posfile << curr_state.y[0][i] << ","
+            << curr_state.y[1][i] << ","
+            << curr_state.y[2][i] << ","
+            << curr_state.y[25][i] << ","
+            << curr_state.y[49][i] << "\n";
+    }
+    p1_posfile.close();
     return 0;
 }

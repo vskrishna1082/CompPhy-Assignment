@@ -27,7 +27,7 @@ int main()
 
         double y1 = curr_y + slope1*(0.5*dx); //temporary y
         double slope2 = derivative_func(curr_x+0.5*dx,y1);
-                                              //
+
         double y2 = curr_y + slope2*(0.5*dx);
         double slope3 = derivative_func(curr_x+0.5*dx,y2);
 
