@@ -31,7 +31,6 @@ double dvdt_func(struct state state, int i)
         y_ip1 =  state.y[i+1].back();
         y_im1 =  state.y[i-1].back();
     }
-    /* cout << "Is the crash before this?" << endl; */
     return y_ip1 + y_im1 -2*y_i;
 }
 
