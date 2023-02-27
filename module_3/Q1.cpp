@@ -20,13 +20,17 @@ double derivative_func(auto x, auto y) {
 int main()
 {
     double curr_x = 0;
-    double dx = 0.01;
+    double dx = 0.001;
+    cout << "Enter Step Size:" << endl;
+    cin >> dx; 
     vector<double> sol_vector = {};
 
     double init_fx = 0;
     sol_vector.push_back(init_fx);
 
-    while (curr_x < 1.55)
+    /* checking if x is dx away from 1.55 should work but
+     * it doesn't catch 1.549 for dx = 0.001 */
+    while (curr_x+0.5*dx <= 1.55)
     {
         double next_fx = est_func_dx(&derivative_func, curr_x, sol_vector.back(), dx);
         sol_vector.push_back(next_fx);

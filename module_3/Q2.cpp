@@ -29,7 +29,9 @@ int main()
     double init_fx = 0;
     sol_vector.push_back(init_fx);
 
-    while (curr_x < 1.55)
+    /* checking if x is dx away from 1.55 should work but
+     * it doesn't catch 1.549 for dx = 0.001 */
+    while (curr_x+0.5*dx <= 1.55)
     {
         double curr_y = sol_vector.back();
         double mid_fx = est_func_dx(&derivative_func, curr_x, curr_y, curr_y, dx/2);

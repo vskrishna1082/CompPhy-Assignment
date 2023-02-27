@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-const double y_actual = 48.078;
+const double y_actual = 48.0784824792;
 
 double derivative_func(auto x, auto y) {
     return pow(y,2)+1;
@@ -14,7 +14,7 @@ double derivative_func(auto x, auto y) {
 int main()
 {
     double curr_x = 0;
-    double dx = 0.001;
+    double dx = 0.01;
     cout << "Enter Step Size:" << endl;
     cin >> dx; 
     vector<double> sol_vector = {};
@@ -22,7 +22,9 @@ int main()
     double init_fx = 0;
     sol_vector.push_back(init_fx);
 
-    while (curr_x+dx < 1.55)
+    /* checking if x is dx away from 1.55 should work but
+     * it doesn't catch 1.549 for dx = 0.001 */
+    while (curr_x+0.5*dx <= 1.55)
     {
         double curr_y = sol_vector.back();
         double slope1 = derivative_func(curr_x,curr_y);
@@ -41,6 +43,7 @@ int main()
         sol_vector.push_back(next_fx);
         curr_x += dx;
     }
+    cout << curr_x << endl;
     cout << abs(y_actual - sol_vector.back()) << endl;
     return 0;
 }
