@@ -20,8 +20,8 @@ const double a_3 = 10*dx*dx;
 
 
 struct point {
-    double y_xmh;
-    double y_xph;
+    double y_xmh; // y at x-h
+    double y_xph; // y at x+h
     double x;
 };
 
@@ -46,13 +46,13 @@ int main()
     while (Continue) {
         count += 1;
         Continue = false;
-        y_old = y_curr;
+        y_old = y_curr; /* update old array */
         for (int i=1; i<N-1; i++) {
             struct point p = {y_curr[i-1],y_old[i+1],x_array[i]};
             y_curr[i] = update_y(p);
 
             if (abs(y_curr[i]-y_old[i]) > 0.0001) {
-                Continue = true;
+                Continue = true; /*loop continues if diff > tol*/
             }
         }
     }
