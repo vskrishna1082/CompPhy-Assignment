@@ -81,4 +81,5 @@ int main()
     }
     outfile.close();
     cout << "Fit converged after " << count << " Iterations.\n";
+    cout << temps[9][9] + shift_temp << "\n";
 }

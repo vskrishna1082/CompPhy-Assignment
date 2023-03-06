@@ -48,7 +48,7 @@ int main()
         Continue = false;
         y_old = y_curr; /* update old array */
         for (int i=1; i<N-1; i++) {
-            struct point p = {y_curr[i-1],y_old[i+1],x_array[i]};
+            struct point p = {y_old[i-1],y_old[i+1],x_array[i]};
             y_curr[i] = update_y(p);
 
             if (abs(y_curr[i]-y_old[i]) > 0.0001) {

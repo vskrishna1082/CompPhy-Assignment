@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <vector>
 #include <array>
 #include <cmath>
@@ -106,25 +107,31 @@ int main()
 
     /* intial conditions */
     curr_state.y[0][0]  = 0.8;
-    curr_state.y[1][0]  = 0.2;
     curr_state.y[25][0] = 0.8;
 
     while (curr_state.t < t_final) {
         curr_state = rk_increment(curr_state, dt);
-        cout << curr_state.t << " ";
     }
-    cout << endl;
     cout << curr_state.y[0].back() << endl;
 
     ofstream p1_posfile;
     p1_posfile.open("data/Q8_particle_1_pos.dat");
     for (int i = 0; i < curr_state.y[0].size(); i++) {
         p1_posfile << curr_state.y[0][i] << ","
-            << curr_state.y[1][i] << ","
-            << curr_state.y[2][i] << ","
-            << curr_state.y[25][i] << ","
-            << curr_state.y[49][i] << "\n";
+            << curr_state.y[25][i] << "\n";
     }
     p1_posfile.close();
+
+    /* const double norm = 2*M_PI/n_particles; */
+    /* const double radius = 5; */
+    /* array<ofstream, 1000> outfiles; */
+    /* for (int i = 0; i < outfiles.size(); i++) { */
+    /*     outfiles[i].open("position_at_"+to_string(2*i)); */
+    /*     outfiles[i] << "50\n\n"; */
+    /*     for (int j = 0; j < curr_state.y.size(); j++) { */
+    /*         outfiles[i] << "N " << radius*cos(norm*j) << " " << radius*sin(norm*j) << " " << curr_state.y[j][2*i] << "\n"; */
+    /*     } */
+    /*     outfiles[i].close(); */
+    /* } */
     return 0;
 }

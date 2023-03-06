@@ -14,9 +14,9 @@ x7 = data7[0]
 v7 = data7[1]
 t = np.linspace(0,50,len(x5))
 xth = 0.1*np.sin(t)
-plt.plot(t,x5, label="Estimated Position ($v_0=1.9$)")
-plt.plot(t,x6, label="Estimated Position ($v_0=1.99$)")
-plt.plot(t,x7, label="Estimated Position ($v_0=2.001$)")
+plt.scatter(t,x5, label="Estimated Position ($v_0=1.9$)", marker='.')
+plt.scatter(t,x6, label="Estimated Position ($v_0=1.99$)", marker='.')
+plt.scatter(t,x7, label="Estimated Position ($v_0=2.001$)", marker='.')
 plt.legend()
 plt.xlabel("time (t)")
 plt.ylabel("position (x)")

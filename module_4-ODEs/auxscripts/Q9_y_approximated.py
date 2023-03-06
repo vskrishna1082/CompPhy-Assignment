@@ -12,5 +12,5 @@ print(data)
 df2 = data.query('x == 0.80')['y']
 print(df2)
 plt.plot(x,2*x)
-plt.plot(x,y)
-plt.show()
+plt.scatter(x,y, marker='.', s=2, c='red')
+plt.savefig("figures/Q9.png")
