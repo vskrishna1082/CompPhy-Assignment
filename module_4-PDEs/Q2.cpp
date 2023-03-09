@@ -4,6 +4,7 @@
 #include <fstream>
 #include <array>
 #include <cmath>
+#include <algorithm>
 using namespace std;
 
 template <typename T, size_t I, size_t J>
@@ -75,7 +76,7 @@ int main()
     double shift_temp = 2000 - temps[0][0];
     for (int i=0; i<34; i++) {
         for (int j=0; j<34; j++) {
-            outfile  << " " << temps[j][i] + shift_temp;
+            outfile  << " " << temps[j][i];
         }
         outfile << "\n";
     }
