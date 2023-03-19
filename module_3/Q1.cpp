@@ -12,12 +12,14 @@ template <typename T, size_t I>
 using array3d = array<array<array<T,I>,I>,I>;
 
 const int l_size = 20, J = 1; // const for using arrays 
-const int n_spins = l_size*l_size*l_size;
+const int n_spins = l_size*l_size*l_size, L2 = l_size*l_size;
 
 class IsingModel {
     public:
         array3d<int, l_size> spins;
         size_t size = l_size;
+        double kbT_inv = 1.0;
+        int n = n_spins;
 
         struct index {int i; int j; int k;}; /* define an index */
 
@@ -36,7 +38,7 @@ class IsingModel {
             }
         }
 
-        /* get magnetic moment of lattice */
+        /* get total magnetic moment of lattice */
         double getMagMoment()
         {
             double mag_moment = 0;
@@ -85,6 +87,39 @@ class IsingModel {
             }
             return totalEnergy / 2;
         }
+
+        /* attempt L*L*L random spin flips + Metropolis criterion */
+        void monteCarloSweep()
+        {
+            mt19937 e;
+            uniform_int_distribution<> u_int(0,L2 - 1);
+            uniform_real_distribution<double> u_mp(0,1);
+            for (int i = 0; i < n; i++)
+            {
+                /* generate a random number and convert it into an index */
+                struct index idx = i_to_idx(u_int(e));
+                double dE = -2*getLocalEnergy(idx);
+                if (dE < 0) {
+                    flip_spin(idx);
+                }
+                else {
+                    double u = exp(-dE*kbT_inv);
+                    double r = u_mp(e);
+                    if (r < u) {
+                        flip_spin(idx)
+                    }
+                }
+            }
+        }
+
+    private:
+        struct index i_to_idx(int i) {
+            return {i/L2, (i/size)%size, i%size};
+        }
+
+        void flip_spin(struct index idx) {
+            spins[idx.i][idx.j][idx.k] *= -1;
+        }
 };
 
 int main()
@@ -92,5 +127,5 @@ int main()
     IsingModel mylattice;
     vector<double> Evec;
     mylattice.fillRandSpins(time(0));
-    cout << mylattice.getMagMoment() << endl;
+    cout << mylattice.getMagMoment()/n_spins << endl;
 }
