@@ -93,13 +93,4 @@ int main()
     vector<double> Evec;
     mylattice.fillRandSpins(time(0));
     cout << mylattice.getMagMoment() << endl;
-
-/*     for (int i = 0; i < 1000000; i++) { */
-/*         mylattice.fillRandSpins(i); */
-/*         Evec.push_back(mylattice.getTotalEnergy()); */
-/*     } */
-/*     ofstream E_file; */
-/*     E_file.open("data/Q1_rand_E2.dat"); */
-/*     copy(Evec.begin(), Evec.end(), ostream_iterator<double>(E_file, "\n")); */
-/*     E_file.close(); */
 }
