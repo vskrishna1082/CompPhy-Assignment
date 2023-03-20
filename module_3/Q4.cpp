@@ -6,7 +6,7 @@
 using namespace std;
 
 const int l_size = 10, J = 1, niter = 50000;
-const double kbT = 4.9;
+const double kbT = 3.9;
 const int n_spins = l_size*l_size*l_size, L2 = l_size*l_size;
 
 #include "ising.h"
@@ -14,21 +14,21 @@ const int n_spins = l_size*l_size*l_size, L2 = l_size*l_size;
 int main()
 {
     const double kbTinv = 1/kbT;
-    vector<double> Mvec;
+    vector<double> Evec;
 
     IsingModel mylattice;
     mylattice.fillRandSpins();
     mylattice.kbT_inv = kbTinv;
 
-    Mvec.push_back(mylattice.getMagMoment()/n_spins);
+    Evec.push_back(mylattice.getTotalEnergy()/n_spins);
     for (int iter = 0; iter < niter; iter++)
     {
         mylattice.monteCarloSweep(iter);
-        Mvec.push_back(mylattice.getMagMoment()/n_spins);
+        Evec.push_back(mylattice.getTotalEnergy()/n_spins);
     }
 
     ofstream outfile;
-    outfile.open("data/Q3_M_T-4.9_init_rand.dat");
-    copy( Mvec.begin(), Mvec.end(), ostream_iterator<double>(outfile, "\n"));
+    outfile.open("data/Q4_E_T-3.9_init_rand.dat");
+    copy( Evec.begin(), Evec.end(), ostream_iterator<double>(outfile, "\n"));
     outfile.close();
 }

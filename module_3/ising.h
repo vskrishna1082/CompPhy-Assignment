@@ -99,9 +99,9 @@ class IsingModel {
         }
 
         /* attempt L^3 random spin flips + Metropolis criterion */
-        void monteCarloSweep()
+        void monteCarloSweep(int seed=0)
         {
-            mt19937 e;
+            mt19937 e(seed);
             uniform_int_distribution<> u_int(0,n - 1);
             uniform_real_distribution<double> u_mp(0,1);
             for (int i = 0; i < n; i++)
@@ -109,12 +109,11 @@ class IsingModel {
                 /* generate a random number and convert it into an index */
                 struct index idx = i_to_idx(u_int(e));
                 double dE = -2*getLocalEnergy(idx);
-                if (dE < 0) {
+                if (dE <= 0) {
                     flip_spin(idx);
                 }
                 else {
                     double u = exp(-dE*kbT_inv);
-                    /* cout << u << " "; */
                     double r = u_mp(e);
                     if (r < u) {
                         flip_spin(idx);
