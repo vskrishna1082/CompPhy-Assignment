@@ -1,3 +1,6 @@
+/* Header file for IsingModel class. Requires const int l_size,
+ * n_spins and L2 to have been initialized before inclusion */
+
 #include <random>
 #include <array>
 #include <cmath>
@@ -27,6 +30,18 @@ class IsingModel {
                 for (int j = 0; j < size; j++) {
                     for (int k = 0; k < size; k++) {
                         spins[i][j][k] = spinarray[u(e)];
+                    }
+                }
+            }
+        }
+
+        /* fill lattice with 1 or -1 */
+        void fillWith(int value = 1)
+        {
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    for (int k = 0; k < size; k++) {
+                        spins[i][j][k] = value;
                     }
                 }
             }
@@ -82,7 +97,7 @@ class IsingModel {
             return totalEnergy / 2;
         }
 
-        /* attempt L*L*L random spin flips + Metropolis criterion */
+        /* attempt L^3 random spin flips + Metropolis criterion */
         void monteCarloSweep()
         {
             mt19937 e;
