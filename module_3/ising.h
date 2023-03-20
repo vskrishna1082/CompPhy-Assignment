@@ -4,6 +4,7 @@
 #include <random>
 #include <array>
 #include <cmath>
+#include <iostream>
 using namespace std;
 
 template <typename T, size_t I>
@@ -101,7 +102,7 @@ class IsingModel {
         void monteCarloSweep()
         {
             mt19937 e;
-            uniform_int_distribution<> u_int(0,L2 - 1);
+            uniform_int_distribution<> u_int(0,n - 1);
             uniform_real_distribution<double> u_mp(0,1);
             for (int i = 0; i < n; i++)
             {
@@ -113,6 +114,7 @@ class IsingModel {
                 }
                 else {
                     double u = exp(-dE*kbT_inv);
+                    /* cout << u << " "; */
                     double r = u_mp(e);
                     if (r < u) {
                         flip_spin(idx);
