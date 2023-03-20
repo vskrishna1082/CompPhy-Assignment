@@ -41,21 +41,21 @@ int main()
 
     ofstream outfile_energy_rand;
     outfile_energy_rand.open("data/Q5_E_T-4.05_init_rand.dat");
-    copy( Evec_rand.begin(), Evec_rand.end(), ostream_iterator<double>(outfile, "\n"));
+    copy( Evec_rand.begin(), Evec_rand.end(), ostream_iterator<double>(outfile_energy_rand, "\n"));
     outfile_energy_rand.close();
 
     ofstream outfile_mag_rand;
     outfile_mag_rand.open("data/Q5_M_T-4.05_init_rand.dat");
-    copy( Mvec_rand.begin(), Mvec_rand.end(), ostream_iterator<double>(outfile, "\n"));
+    copy( Mvec_rand.begin(), Mvec_rand.end(), ostream_iterator<double>(outfile_mag_rand, "\n"));
     outfile_mag_rand.close();
 
     ofstream outfile_energy_1;
-    outfile_energy_rand.open("data/Q5_E_T-4.05_init_1.dat");
-    copy( Evec_rand.begin(), Evec_rand.end(), ostream_iterator<double>(outfile, "\n"));
+    outfile_energy_1.open("data/Q5_E_T-4.05_init_1.dat");
+    copy( Evec_1.begin(), Evec_1.end(), ostream_iterator<double>(outfile_energy_1, "\n"));
     outfile_energy_1.close();
 
     ofstream outfile_mag_1;
-    outfile_mag_rand.open("data/Q5_M_T-4.05_init_1.dat");
-    copy( Mvec_rand.begin(), Mvec_rand.end(), ostream_iterator<double>(outfile, "\n"));
+    outfile_mag_1.open("data/Q5_M_T-4.05_init_1.dat");
+    copy( Mvec_1.begin(), Mvec_1.end(), ostream_iterator<double>(outfile_mag_1, "\n"));
     outfile_mag_1.close();
 }
