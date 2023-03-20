@@ -23,7 +23,7 @@ int main()
     Evec.push_back(mylattice.getTotalEnergy()/n_spins);
     for (int iter = 0; iter < niter; iter++)
     {
-        mylattice.monteCarloSweep(iter);
+        mylattice.monteCarloSweep();
         Evec.push_back(mylattice.getTotalEnergy()/n_spins);
     }
 

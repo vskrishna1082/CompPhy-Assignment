@@ -98,15 +98,18 @@ class IsingModel {
             return totalEnergy / 2;
         }
 
+        /* Declare random number generators for monteCarloSweep */
+        mt19937 e;
+        uniform_int_distribution<> u_int;
+        uniform_real_distribution<double> u_mp;
+        /* initialize random distributions */
+        IsingModel() : u_int(0, n - 1), u_mp(0,1) {}
         /* attempt L^3 random spin flips + Metropolis criterion */
-        void monteCarloSweep(int seed=0)
+        void monteCarloSweep()
         {
-            mt19937 e(seed);
-            uniform_int_distribution<> u_int(0,n - 1);
-            uniform_real_distribution<double> u_mp(0,1);
             for (int i = 0; i < n; i++)
             {
-                /* generate a random number and convert it into an index */
+                /* generate rand no. and convert it into index */
                 struct index idx = i_to_idx(u_int(e));
                 double dE = -2*getLocalEnergy(idx);
                 if (dE <= 0) {
