@@ -13,5 +13,5 @@ int main()
 {
     IsingModel mylattice;
     mylattice.fillWith(1);
-    cout << mylattice.getTotalEnergy()/n_spins << endl;
+    cout << mylattice.getTotalEnergy() << endl;
 }

@@ -12,6 +12,6 @@ const int n_spins = l_size*l_size*l_size, L2 = l_size*l_size;
 int main()
 {
     IsingModel mylattice;
-    mylattice.fillWith(1);
-    cout << mylattice.getMagMoment()/n_spins << endl;
+    mylattice.fillWith(-1);
+    cout << mylattice.getMagMoment() << endl;
 }
