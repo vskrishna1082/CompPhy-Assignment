@@ -102,8 +102,8 @@ class IsingModel {
         mt19937 e;
         uniform_int_distribution<> u_int;
         uniform_real_distribution<double> u_mp;
-        /* initialize random distributions */
-        IsingModel() : u_int(0, n - 1), u_mp(0,1) {}
+        /* initialize random distributions and index_array*/
+        IsingModel() : u_int(0, n - 1), u_mp(0,1) {generate_index();}
         /* attempt L^3 random spin flips + Metropolis criterion */
         void monteCarloSweep()
         {
@@ -126,8 +126,16 @@ class IsingModel {
         }
 
     private:
+        /* generate a set of index for reference */
+        array<struct index, n_spins> idx_map;
+        void generate_index() {
+            for (int i = 0; i < idx_map.size(); i++) {
+                idx_map[i] = {i/L2, (i/size)%size, i%size};
+            }
+        }
+
         struct index i_to_idx(int i) {
-            return {i/L2, (i/size)%size, i%size};
+            return idx_map[i];
         }
 
         void flip_spin(struct index idx) {
