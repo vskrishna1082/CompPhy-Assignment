@@ -6,7 +6,7 @@
 using namespace std;
 
 const int l_size = 10, J = 1, niter = 50000;
-const double kbT = 3.9;
+const double kbT = 4.05;
 const int n_spins = l_size*l_size*l_size, L2 = l_size*l_size;
 
 #include "ising.h"
