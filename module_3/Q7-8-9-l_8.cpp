@@ -36,7 +36,7 @@ int main()
             Evec[i].push_back(mylattice.getTotalEnergy()/n_spins);
             Mvec[i].push_back(mylattice.getMagMoment()/n_spins);
         }
-        cout << kbT << " " << flush;
+        /* cout << kbT << " " << flush; */
         kbT += dT; // increment kbT
     }
 

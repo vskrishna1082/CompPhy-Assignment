@@ -16,12 +16,16 @@ Exp9_M2 = data9[:,1]
 Exp9_M4 = data9[:,2]
 T = np.linspace(3.8,4.7,np.size(Exp7_M2))
 
-U7 = Exp7_M4/(3*Exp7_M2)
-U8 = Exp8_M4/(3*Exp8_M2)
-U9 = Exp9_M4/(3*Exp9_M2)
+U7 = 1 - Exp7_M4/(3*(Exp7_M2)**2)
+U8 = 1 - Exp8_M4/(3*(Exp8_M2)**2)
+U9 = 1 - Exp9_M4/(3*(Exp9_M2)**2)
 
-plt.plot(T, U7, '--o', label="7")
-plt.plot(T, U8, '--o', label="8")
-plt.plot(T, U9, '--o', label="9")
+plt.title("Binder Cumulant vs T")
+plt.plot(T, U7, '--.', label="L = 7", markerfacecolor='white')
+plt.plot(T, U8, '--.', label="L = 8", markerfacecolor='white')
+plt.plot(T, U9, '--.', label="L = 9", markerfacecolor='white')
+plt.axvline(x=4.5, linestyle='--', label="x = 4.5", c="black")
 plt.legend()
-plt.show()
+plt.ylabel("U")
+plt.xlabel("T")
+plt.savefig("figures/Q11_binder_cumulant.png")
