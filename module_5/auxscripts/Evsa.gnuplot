@@ -1,4 +1,4 @@
-set terminal pngcairo enhanced size 800,600
+set terminal pngcairo enhanced size 500,400
 set output 'figures/Evsa.png'
 
 set xlabel "Periodicity (a)"
