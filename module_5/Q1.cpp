@@ -44,8 +44,8 @@ int main()
         fill_hmatrix();
         Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> es(H);
         Eigen::MatrixXd E = es.eigenvalues();
-        cout << setw(2) << (int) a <<  "," << setprecision(6) << fixed << E(0) << endl;
-        a += 4;
+        cout << setw(2) << (int) a <<  " " << setprecision(6) << fixed << E(0) << endl;
+        a += 2;
     }
         return 0;
 }
