@@ -11,20 +11,18 @@ using namespace std;
 const double pi = M_PI;
 
 /* number of basis elements - more is better */
-const int n = 10, npw = 2*n +1;
-const double v0=1, a=5, b=2;
-array<double, npw> kn;
+const int n = 50, npw = 2*n +1;
+double v0=1, a=5, b=2;
+double kn[npw];
 double h[npw][npw]; // use a column-major h matrix for eigen
 Eigen::Matrix<double, npw, npw> H; // create npw x npw matrix
-double x, dx, norm, prob;
-complex<double> f;
 
 void fill_kvector()
 {
     kn[0] = 0;
     for (int i = 1; i < npw-1; i+=2) {
-        kn[i] = ((i+1/2.0)*2.0*pi/a);
-        kn[i+1] = -((i+1/2.0)*2.0*pi/a);
+        kn[i] = (((i+1)/2.0)*2.0*pi/a);
+        kn[i+1] = -(((i+1)/2.0)*2.0*pi/a);
     }
 }
 
@@ -41,13 +39,13 @@ void fill_hmatrix()
 
 int main()
 {
-    fill_kvector();
-    /* Eigen::Map<Eigen::Matrix<double, npw, npw, Eigen::RowMajor>> H(h); // create npw x npw matrix */
-    fill_hmatrix();
-    cout << setprecision(2) << fixed << H << endl; // sanity-check: prints H matrix - check for symm.
-    Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> es(H);
-    cout << endl;
-    Eigen::MatrixXd E = es.eigenvalues();
-    cout << setprecision(6) << E << endl;
-    return 0;
+    while (a < 30) {
+        fill_kvector();
+        fill_hmatrix();
+        Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> es(H);
+        Eigen::MatrixXd E = es.eigenvalues();
+        cout << setw(2) << (int) a <<  "," << setprecision(6) << fixed << E(0) << endl;
+        a += 4;
+    }
+        return 0;
 }
