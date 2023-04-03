@@ -14,7 +14,6 @@ const double pi = M_PI;
 const int n = 50, npw = 2*n +1;
 double v0=1, a=5, b=2;
 double kn[npw];
-double h[npw][npw]; // use a column-major h matrix for eigen
 Eigen::Matrix<double, npw, npw> H; // create npw x npw matrix
 
 void fill_kvector()
