@@ -17,8 +17,8 @@ int main()
     int iter = 20000;
     for (int i = 0; i < iter; i++) {
         mybox.verlet_step();
-        KE_list.push_back(mybox.getKE());
-        PE_list.push_back(mybox.getPE());
+        KE_list.push_back(mybox.getKE()/n);
+        PE_list.push_back(mybox.getPE()/n);
         if (i%100 == 0) {
             mybox.thermostat(1);
             cout << "=" << flush;

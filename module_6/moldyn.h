@@ -296,7 +296,7 @@ class SimulationBox
         void force_update_full()
         {
             PE = 0;
-/* #pragma omp parallel for reduction(+:PE) */
+#pragma omp parallel for reduction(+:PE)
             for (int i=0; i<n-1; i++) {
                 for (int j = i+1; j < n; j++) {
                     double rij_sq = 0, r_diff[dim];
@@ -311,6 +311,7 @@ class SimulationBox
                     if (rij_sq < r_c_sq) {
                         struct f_and_pot fp = lj_mod_f_and_pot(rij_sq);
                         PE += fp.potential;
+#pragma omp critical
                         for (int k = 0; k < dim; k++) {
                             force[i][k] += fp.force*r_diff[k];
                             force[j][k] -= fp.force*r_diff[k];
@@ -339,6 +340,7 @@ class SimulationBox
                     if (rij_sq < r_c_sq) {
                         struct f_and_pot fp = lj_mod_f_and_pot(rij_sq);
                         PE += fp.potential;
+#pragma omp critical
                         for (int k = 0; k < dim; k++) {
                             force[i][k] += fp.force*r_diff[k];
                             force[j][k] -= fp.force*r_diff[k];
